@@ -8,17 +8,18 @@ import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
 import javax.persistence.Id
 
+const val LOAN_DURATION: Long = 14
+
 @Entity
-data class Book(
+data class Loan(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = -1,
-        val title: String,
-        val author: String,
-        val catalog: String,
-        val count: Int = 0,
-        val stockedDate: LocalDate = LocalDate.now()
+        val bookId: Long,
+        val memberId: Long,
+        val checkoutDate: LocalDate = LocalDate.now(),
+        val dueDate: LocalDate = LocalDate.now().plusDays(LOAN_DURATION)
 )
 
-@RepositoryRestResource(collectionResourceRel = "book", path = "book")
-interface BookRepository : PagingAndSortingRepository<Book, Long>
+@RepositoryRestResource(collectionResourceRel = "loan", path = "loan")
+interface LoanRepository : PagingAndSortingRepository<Loan, Long>
