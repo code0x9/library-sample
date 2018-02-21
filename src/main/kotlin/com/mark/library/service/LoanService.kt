@@ -2,7 +2,6 @@ package com.mark.library.service
 
 import com.mark.library.domain.*
 import org.springframework.stereotype.Service
-import java.time.LocalDate
 import javax.annotation.PostConstruct
 
 @Service
@@ -33,23 +32,6 @@ class LoanService(
                         Member(email = "member3@library.gov")
                 )
         )
-
-        loanRepo.save(
-                listOf(
-                        Loan(bookId = 1,
-                                memberId = 1,
-                                dueDate = LocalDate.now()),
-                        Loan(bookId = 1,
-                                memberId = 1,
-                                dueDate = LocalDate.now().plusDays(1)),
-                        Loan(bookId = 1,
-                                memberId = 1,
-                                dueDate = LocalDate.now().plusDays(2)),
-                        Loan(bookId = 1,
-                                memberId = 1,
-                                dueDate = LocalDate.now().plusDays(3))
-                )
-        )
     }
 
     fun checkOut(memberId: Long, bookId: Long): Loan {
@@ -72,6 +54,26 @@ class LoanService(
 
         // update member loans
         memberRepo.save(member.copy(loans = member.loans + loan))
+
+        return loan
+    }
+
+    fun checkIn(memberId: Long, bookId: Long): Loan {
+        val member = memberRepo.findOne(memberId)
+                ?: throw IllegalArgumentException("member $memberId not found")
+        val book: Book = bookRepo.findOne(bookId)
+                ?: throw IllegalArgumentException("book $bookId not found")
+        val loan: Loan = loanRepo.findByBookIdAndMemberId(bookId, memberId)
+                ?: throw IllegalArgumentException("loan by book $bookId and member $memberId not found")
+
+        // update book remaining
+        bookRepo.save(book.copy(count = book.count + 1))
+
+        // update member loans
+        memberRepo.save(member.copy(loans = member.loans - loan))
+
+        // delete loan
+        loanRepo.delete(loan.id)
 
         return loan
     }
