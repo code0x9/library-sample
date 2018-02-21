@@ -9,6 +9,7 @@ data class Member(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         val id: Long = -1,
+        val email: String,
         @OneToMany
         val loans: List<Loan> = emptyList()
 )

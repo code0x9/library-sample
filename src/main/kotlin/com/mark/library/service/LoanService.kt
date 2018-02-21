@@ -2,6 +2,7 @@ package com.mark.library.service
 
 import com.mark.library.domain.*
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 import javax.annotation.PostConstruct
 
 @Service
@@ -27,9 +28,26 @@ class LoanService(
 
         memberRepo.save(
                 listOf(
-                        Member(1),
-                        Member(2),
-                        Member(3)
+                        Member(email = "member1@library.gov"),
+                        Member(email = "member2@library.gov"),
+                        Member(email = "member3@library.gov")
+                )
+        )
+
+        loanRepo.save(
+                listOf(
+                        Loan(bookId = 1,
+                                memberId = 1,
+                                dueDate = LocalDate.now()),
+                        Loan(bookId = 1,
+                                memberId = 1,
+                                dueDate = LocalDate.now().plusDays(1)),
+                        Loan(bookId = 1,
+                                memberId = 1,
+                                dueDate = LocalDate.now().plusDays(2)),
+                        Loan(bookId = 1,
+                                memberId = 1,
+                                dueDate = LocalDate.now().plusDays(3))
                 )
         )
     }
