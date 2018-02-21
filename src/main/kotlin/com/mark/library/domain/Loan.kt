@@ -1,5 +1,6 @@
 package com.mark.library.domain
 
+import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
 import java.time.LocalDate
@@ -22,4 +23,18 @@ data class Loan(
 )
 
 @RepositoryRestResource(collectionResourceRel = "loan", path = "loan")
-interface LoanRepository : PagingAndSortingRepository<Loan, Long>
+interface LoanRepository : PagingAndSortingRepository<Loan, Long> {
+    interface MailAndDueOnly {
+        val email: String
+        val dueDate: LocalDate
+    }
+
+    @Query("""
+SELECT m.email   AS email,
+       l.dueDate AS dueDate
+FROM   Loan l,
+       Member m
+WHERE  l.memberId = m.id
+       AND l.dueDate = ?1""")
+    fun findByDueDateEquals(date: LocalDate = LocalDate.now().plusDays(1)): List<MailAndDueOnly>
+}

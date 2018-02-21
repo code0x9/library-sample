@@ -1,0 +1,3 @@
+@args Date dueDate
+<중앙2문헌실>
+귀하(혹은 가족)의 도서반납일은 @dueDate.format("M월 d일(E)", Locale.KOREA)입니다.
