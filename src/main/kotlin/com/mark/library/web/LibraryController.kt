@@ -12,6 +12,10 @@ data class CheckoutRequest(
         val memberId: Long,
         val bookId: Long
 )
+data class CheckinRequest(
+        val memberId: Long,
+        val bookId: Long
+)
 
 @RestController
 class LibraryController(
@@ -21,4 +25,9 @@ class LibraryController(
     @ResponseStatus(HttpStatus.CREATED)
     fun checkOut(@RequestBody req: CheckoutRequest): Loan =
             loanService.checkOut(req.memberId, req.bookId)
+
+    @PostMapping("/checkin")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun checkIn(@RequestBody req: CheckinRequest): Loan =
+            loanService.checkIn(req.memberId, req.bookId)
 }
