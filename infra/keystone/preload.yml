@@ -1,0 +1,23 @@
+users:
+  - username: admin
+    password: s3cr3t
+    project: library
+    role: admin
+
+  - username: member
+    password: m3mb3r
+    project: library
+    role: member
+
+  - username: guest
+    password: gu3st
+    project: library
+    role: guest
+
+endpoints:
+  - name: keystone
+    description: library identity service
+    type: identity
+    region: RegionOne
+    url: http://127.0.0.1:5000/v3
+    interfaces: ['public', 'internal', 'admin']

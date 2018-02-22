@@ -38,5 +38,5 @@ WHERE  l.memberId = m.id
        AND l.dueDate = ?1""")
     fun findByDueDateEquals(date: LocalDate = LocalDate.now().plusDays(1)): List<MailAndDueOnly>
 
-    fun findByBookIdAndMemberId(bookId: Long, memberId: Long): Loan?
+    fun findFirstByBookIdAndMemberId(bookId: Long, memberId: Long): Loan?
 }
