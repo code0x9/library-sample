@@ -63,7 +63,7 @@ class LoanService(
                 ?: throw IllegalArgumentException("member $memberId not found")
         val book: Book = bookRepo.findOne(bookId)
                 ?: throw IllegalArgumentException("book $bookId not found")
-        val loan: Loan = loanRepo.findByBookIdAndMemberId(bookId, memberId)
+        val loan: Loan = loanRepo.findFirstByBookIdAndMemberId(bookId, memberId)
                 ?: throw IllegalArgumentException("loan by book $bookId and member $memberId not found")
 
         // update book remaining

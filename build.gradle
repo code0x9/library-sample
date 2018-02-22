@@ -33,15 +33,28 @@ repositories {
 }
 
 dependencies {
+    // spring
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
+
+    // rdbms
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
 
+    // kotlin
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect', version: kotlinVersion
+
+    // openstack
+    compile group: 'org.pacesys', name: 'openstack4j', version: '3.1.0'
+
+    // misc
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.4.1'
     compile group: 'org.rythmengine', name: 'rythm-engine', version: '1.2.2'
     compile group: 'joda-time', name: 'joda-time', version: '2.9.9'
+    compile group: 'javax.inject', name: 'javax.inject', version: '1'
+
+    // documentation
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
     compile group: 'io.springfox', name: 'springfox-data-rest', version: '2.8.0'

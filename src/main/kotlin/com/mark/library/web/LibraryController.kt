@@ -12,6 +12,7 @@ data class CheckoutRequest(
         val memberId: Long,
         val bookId: Long
 )
+
 data class CheckinRequest(
         val memberId: Long,
         val bookId: Long
