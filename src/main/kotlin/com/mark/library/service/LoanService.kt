@@ -2,7 +2,6 @@ package com.mark.library.service
 
 import com.mark.library.domain.*
 import org.springframework.stereotype.Service
-import javax.annotation.PostConstruct
 
 @Service
 class LoanService(
@@ -10,30 +9,6 @@ class LoanService(
         private val memberRepo: MemberRepository,
         private val loanRepo: LoanRepository
 ) {
-    @PostConstruct
-    fun init() {
-        bookRepo.save(
-                listOf(
-                        Book(title = "선과 모터사이클 관리술: 가치에 대한 탐구",
-                                author = "로버트 M. 피어시그",
-                                catalog = "843",
-                                count = 3),
-                        Book(title = "제3인류",
-                                author = "베르나르 베르베르",
-                                catalog = "863",
-                                count = 1)
-                )
-        )
-
-        memberRepo.save(
-                listOf(
-                        Member(email = "member1@library.gov"),
-                        Member(email = "member2@library.gov"),
-                        Member(email = "member3@library.gov")
-                )
-        )
-    }
-
     fun checkOut(memberId: Long, bookId: Long): Loan {
         val member = memberRepo.findOne(memberId)
                 ?: throw IllegalArgumentException("member $memberId not found")

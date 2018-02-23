@@ -30,6 +30,7 @@ compileTestKotlin {
 
 repositories {
     jcenter()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
@@ -39,7 +40,10 @@ dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: springBootVersion
 
     // rdbms
+    compile group: 'com.zaxxer', name: 'HikariCP', version: '2.7.7'
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
+    compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.1'
 
     // kotlin
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion

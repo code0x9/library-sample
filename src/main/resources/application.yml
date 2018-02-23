@@ -3,10 +3,16 @@ logging:
     org:
       springframework:
         security: DEBUG
-      hibernate:
-       SQL: DEBUG
 
 keystone:
   endpoint: http://127.0.0.1:5000/v3
   domain: default
   project: library
+
+spring:
+  profiles:
+    active: mysql
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
