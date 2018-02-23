@@ -2,3 +2,9 @@ version: '3'
 services:
   library:
     image: seunglee150/library-sample
+    ports:
+      - "8080:8080"
+    external_links:
+     - keystone_keystone_1:keystone
+     - rdbms_mysql_1:mysql
+     - rdbms_postgres_1:postgres

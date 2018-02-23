@@ -1,6 +1,6 @@
 spring:
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:mysql://localhost:3306/library?useSSL=false&autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://mysql:3306/library?useSSL=false&autoReconnect=true&autoReconnectForPools=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: library
     password: fkdlqmfjfl
