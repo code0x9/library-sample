@@ -1,7 +1,7 @@
 package com.mark.library.ext
 
 import com.google.common.truth.Truth
-import org.junit.jupiter.api.Test
+import org.junit.Test
 import java.time.LocalDate
 import java.util.*
 

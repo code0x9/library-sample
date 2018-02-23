@@ -3,30 +3,28 @@ package com.mark.library
 import com.google.common.truth.Truth
 import com.mark.library.domain.*
 import com.mark.library.service.LoanService
-import org.junit.jupiter.api.AfterEach
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
-import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.context.junit4.SpringRunner
 import java.time.LocalDate
 import javax.inject.Inject
 
 @ActiveProfiles("test")
-@ExtendWith(SpringExtension::class)
+@RunWith(SpringRunner::class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class IntegrationTests {
     @Inject
     lateinit var bookRepo: BookRepository
     @Inject
-    lateinit var loanRepo: LoanRepository
-    @Inject
     lateinit var memberRepo: MemberRepository
     @Inject
     lateinit var loanService: LoanService
 
-    @BeforeEach
+    @Before
     fun setup() {
         bookRepo.save(
                 listOf(
@@ -42,7 +40,7 @@ class IntegrationTests {
         )
     }
 
-    @AfterEach
+    @After
     fun tearDown() {
         bookRepo.delete(1)
         bookRepo.delete(2)

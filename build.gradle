@@ -3,12 +3,10 @@ plugins {
     id "org.jetbrains.kotlin.jvm" version "1.2.21"
     id "org.jetbrains.kotlin.plugin.jpa" version "1.2.21"
     id "org.jetbrains.kotlin.plugin.spring" version "1.2.21"
-    id "org.mikeneck.junit.starter.normal" version "5.0.2"
     id 'org.springframework.boot' version '1.5.10.RELEASE'
 }
 
 ext {
-    cucumberVersion = '2.3.1'
     kotlinVersion = '1.2.21'
     springBootVersion = '1.5.10.RELEASE'
 }
@@ -37,16 +35,6 @@ compileTestKotlin {
     }
 }
 
-junitPlatform {
-    platformVersion '1.0.3'
-    filters {
-        engines {
-            include 'junit-jupiter'
-        }
-    }
-    enableStandardTestTask true
-}
-
 repositories {
     jcenter()
     maven { url 'https://jitpack.io' }
@@ -72,7 +60,6 @@ dependencies {
     }
 
     // test
-    testCompile group: 'com.github.sbrannen', name: 'spring-test-junit5', version: '1.0.3'
     testCompile group: 'com.google.truth', name: 'truth', version: '0.39'
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
         exclude module: 'commons-logging'
