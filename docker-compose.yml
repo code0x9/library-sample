@@ -1,0 +1,20 @@
+version: '3'
+services:
+  library:
+#    image: seunglee150/library-sample
+    image: test
+    ports:
+      - "8080:8080"
+    external_links:
+      - keystone_keystone_1:keystone
+      - rdbms_mysql_1:mysql
+      - rdbms_postgres_1:postgres
+    networks:
+      - default
+      - keystone_default
+      - rdbms_default
+networks:
+  rdbms_default:
+    external: true
+  keystone_default:
+    external: true

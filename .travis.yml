@@ -1,0 +1,21 @@
+language: java
+cache:
+  pip: true
+  directories:
+    - $HOME/.gradle
+services:
+  - docker
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+script:
+  - ./gradlew clean test
+after_success:
+  - |
+    docker build -t seunglee150/library-sample .
+    docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    docker push seunglee150/library-sample
+deploy:
+  - provider: script
+    script: echo "DO DEPLOY HERE"

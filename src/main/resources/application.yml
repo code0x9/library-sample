@@ -7,7 +7,7 @@ logging:
        cache: DEBUG
 
 keystone:
-  endpoint: http://127.0.0.1:5000/v3
+  endpoint: http://keystone:5000/v3
   domain: default
   project: library
 
