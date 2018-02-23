@@ -3,6 +3,8 @@ logging:
     org:
       springframework:
         security: DEBUG
+      hibernate:
+       cache: DEBUG
 
 keystone:
   endpoint: http://127.0.0.1:5000/v3
@@ -11,8 +13,14 @@ keystone:
 
 spring:
   profiles:
-    active: mysql
+    active: postgresql
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: update
+    properties:
+      hibernate:
+        ddl-auto: update
+        cache:
+          use_query_cache: false
+          use_second_level_cache: true
+          region:
+            factory_class: org.hibernate.cache.ehcache.EhCacheRegionFactory

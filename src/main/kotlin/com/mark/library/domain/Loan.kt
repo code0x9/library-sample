@@ -1,5 +1,7 @@
 package com.mark.library.domain
 
+import org.hibernate.annotations.Cache
+import org.hibernate.annotations.CacheConcurrencyStrategy
 import org.springframework.data.jpa.repository.Query
 import org.springframework.data.repository.PagingAndSortingRepository
 import org.springframework.data.rest.core.annotation.RepositoryRestResource
@@ -12,6 +14,7 @@ import javax.persistence.Id
 const val LOAN_DURATION: Long = 14
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 data class Loan(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
