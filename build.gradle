@@ -1,11 +1,14 @@
 plugins {
+    id "com.bmuschko.clover" version "2.2.0"
     id "org.jetbrains.kotlin.jvm" version "1.2.21"
     id "org.jetbrains.kotlin.plugin.jpa" version "1.2.21"
     id "org.jetbrains.kotlin.plugin.spring" version "1.2.21"
+    id "org.mikeneck.junit.starter.normal" version "5.0.2"
     id 'org.springframework.boot' version '1.5.10.RELEASE'
 }
 
 ext {
+    cucumberVersion = '2.3.1'
     kotlinVersion = '1.2.21'
     springBootVersion = '1.5.10.RELEASE'
 }
@@ -34,6 +37,16 @@ compileTestKotlin {
     }
 }
 
+junitPlatform {
+    platformVersion '1.0.3'
+    filters {
+        engines {
+            include 'junit-jupiter'
+        }
+    }
+    enableStandardTestTask true
+}
+
 repositories {
     jcenter()
     maven { url 'https://jitpack.io' }
@@ -51,11 +64,20 @@ dependencies {
     compile group: 'com.h2database', name: 'h2', version: '1.4.196'
     compile group: 'mysql', name: 'mysql-connector-java', version: '6.0.6'
     compile group: 'org.postgresql', name: 'postgresql', version: '42.2.1'
+    compile group: 'org.hsqldb', name: 'hsqldb', version: '2.4.0'
 
     // cache
     compile group: 'org.hibernate', name: 'hibernate-ehcache', version: '5.0.12.Final', {
         exclude module: 'hibernate-core'
     }
+
+    // test
+    testCompile group: 'com.github.sbrannen', name: 'spring-test-junit5', version: '1.0.3'
+    testCompile group: 'com.google.truth', name: 'truth', version: '0.39'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion, {
+        exclude module: 'commons-logging'
+    }
+    clover group: 'org.openclover', name: 'clover', version: '4.2.1'
 
     // kotlin
     compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: kotlinVersion
@@ -77,4 +99,12 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-data-rest', version: '2.8.0'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: springBootVersion
+}
+
+clover {
+    enabled = true
+
+    report {
+        html = true
+    }
 }
